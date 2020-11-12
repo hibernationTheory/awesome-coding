@@ -1,0 +1,32 @@
+const fetch = require("node-fetch");
+const { API_KEY } = require("./config");
+
+function filterSymbolSearchResults(searchResults) {
+  const matches = searchResults.bestMatches;
+  const matchesFromUS = matches.filter((symbolData) => {
+    if (symbolData["4. region"] === "United States") {
+      return true;
+    }
+  });
+
+  const match =
+    (matchesFromUS[0] && matchesFromUS[0]["1. symbol"]) || null;
+
+  return match;
+}
+
+async function getSymbol(companyName) {
+  const endpointUrl = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${companyName}&apikey=${API_KEY}`;
+  const response = await fetch(endpointUrl);
+  const data = await response.json();
+
+  return filterSymbolSearchResults(data);
+}
+
+async function main() {
+  const companyName = "tesla";
+  const symbol = await getSymbol(companyName);
+  console.log(symbol);
+}
+
+main();

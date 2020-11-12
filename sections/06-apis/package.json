@@ -1,0 +1,17 @@
+{
+  "name": "apis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "newsapi": "^2.4.1",
+    "node-fetch": "^2.6.1",
+    "sentiment": "^5.0.2"
+  }
+}
